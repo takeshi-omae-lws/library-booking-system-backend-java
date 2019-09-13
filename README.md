@@ -1,8 +1,13 @@
-Library Booking System Backend using Java <!-- omit on toc -->
+Library Booking System Backend using Java <!-- omit in toc -->
 ========================================
 
-TOC <!-- omit on toc -->
+TOC <!-- omit in toc -->
 -------------------
+- [Business Requirements](#business-requirements)
+- [Architecture](#architecture)
+  - [Overview](#overview)
+- [Database](#database)
+  - [ERD](#erd)
 
 
 Business Requirements
