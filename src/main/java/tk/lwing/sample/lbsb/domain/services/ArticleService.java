@@ -15,12 +15,12 @@ public class ArticleService {
     @NotNull
     private final ArticleRepository articleRepository;
 
-    // change Articles status
-    public List<Article> updateStatus(List<Article> articles,
-                                      ArticleStatus status) {
+    // change ArticlesTbl status
+    public List<Article> updateArticleStatus(List<Article> articles,
+                                             ArticleStatus status) {
         for (Article article : articles) {
             article.setStatus(status);
-            this.articleRepository.update(article);
+            this.articleRepository.updateArticleStatus(article);
         }
         List<Article> updatedArticleList = new ArrayList<>();
         for (Article article : articles) {

@@ -36,7 +36,7 @@ public class CustomerUseCase {
             throw new RuntimeException("wrong selected articles");
         }
 
-        // check Articles status
+        // check ArticlesTbl status
         for (Article article : articles) {
             logger.debug("article.isAvailable() : " +
                     article.isAvailable());
@@ -45,8 +45,8 @@ public class CustomerUseCase {
                         "your selected articles contain unavailable article");
             }
         }
-        // change Articles status
-        this.articleService.updateStatus(
+        // change ArticlesTbl status
+        this.articleService.updateArticleStatus(
                 articles, ArticleStatus.UNAVAILABLE);
 
         // change BorrowingArticles status
@@ -72,8 +72,8 @@ public class CustomerUseCase {
                 this.borrowingArticlesService.deleteBorrowingArticles(
                         customer, articles);
 
-        // change Articles status
-        this.articleService.updateStatus(
+        // change ArticlesTbl status
+        this.articleService.updateArticleStatus(
                 articles, ArticleStatus.AVAILABLE);
 
         return updatedBorrowingArticles;

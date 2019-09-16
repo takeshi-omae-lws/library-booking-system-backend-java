@@ -65,10 +65,10 @@ public class IMTests {
 
         System.out.println(this.articleRepository.findAll().toString());
 
-        System.out.println(this.articleRepository.findByValid().toString());
+        System.out.println(this.articleRepository.findAvailable().toString());
 
         article1.setStatus(ArticleStatus.UNAVAILABLE);
-        System.out.println(this.articleRepository.update(article1).toString());
+        System.out.println(this.articleRepository.updateArticleStatus(article1).toString());
         System.out.println(this.articleRepository.findAll().toString());
 
     }
