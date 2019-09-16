@@ -28,7 +28,8 @@ public class CustomerUseCase {
 
 
     // Borrow
-    BorrowingArticles borrowArticles(Customer customer, List<Article> articles) {
+    public BorrowingArticles borrowArticles(Customer customer,
+                                            List<Article> articles) {
         // check BorrowingArticles status
         logger.debug("borrowingArticlesService.isValid() : " +
                 this.borrowingArticlesService.isValid(customer, articles));
@@ -62,8 +63,8 @@ public class CustomerUseCase {
     }
 
     // ArticlesReturned
-    BorrowingArticles returnArticles(Customer customer,
-                                     List<Article> articles) {
+    public BorrowingArticles returnArticles(Customer customer,
+                                            List<Article> articles) {
         // save ArticlesReturn
         this.borrowingArticlesService.saveArticlesReturned(customer, articles);
 
