@@ -11,9 +11,9 @@ public interface ArticleRepository {
 
     List<Article> findAll();
 
-    List<Article> findByValid();
+    List<Article> findAvailable();
 
     Article findById(final ArticleID id);
 
-    Article update(final Article article);
+    Article updateArticleStatus(final Article article);
 }

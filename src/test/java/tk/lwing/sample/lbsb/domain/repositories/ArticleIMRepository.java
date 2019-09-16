@@ -26,7 +26,7 @@ public class ArticleIMRepository implements ArticleRepository {
 
 
     @Override
-    public List<Article> findByValid() {
+    public List<Article> findAvailable() {
         List<Article> articles = new ArrayList<>();
 
         this.articleMap.values()
@@ -44,7 +44,7 @@ public class ArticleIMRepository implements ArticleRepository {
     }
 
     @Override
-    public Article update(Article article) {
+    public Article updateArticleStatus(Article article) {
         ArticleID articleID = article.getId();
         this.articleMap.put(articleID.get(), article);
         return this.articleMap.get(articleID.get());

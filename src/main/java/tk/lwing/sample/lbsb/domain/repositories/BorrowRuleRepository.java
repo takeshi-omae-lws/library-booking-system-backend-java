@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BorrowRuleRepository {
 
-    BorrowRule save(final BorrowRule keepRule);
+    BorrowRule save(final BorrowRule borrowRule);
 
     List<BorrowRule> findAll();
 

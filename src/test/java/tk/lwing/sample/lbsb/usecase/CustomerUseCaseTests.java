@@ -196,7 +196,7 @@ public class CustomerUseCaseTests {
                 this.articleRepository.findAll().toString());
 
         logger.debug("Args Customer: " + customer1.toString() +
-                "Args Articles: " + articles1.toString());
+                "Args ArticlesTbl: " + articles1.toString());
 
         //
         // Execute
