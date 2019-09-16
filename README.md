@@ -26,6 +26,9 @@ Architecture
 ### Overview
 ![Overview](https://raw.githubusercontent.com/takeshi-omae-lws/media/master/LibraryBookingSystem.png)
 
+### Data Mappings
+![DataMapping](https://raw.githubusercontent.com/takeshi-omae-lws/media/master/LibraryBookingSystemMapping.png)
+
 
 Database
 -------------------
