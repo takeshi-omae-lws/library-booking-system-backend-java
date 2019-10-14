@@ -4,18 +4,17 @@ import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
-import tk.lwing.sample.lbsb.domain.valueobjects.CustomerID;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Getter
 @AllArgsConstructor
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "customer")
 @ToString
 public class BorrowingArticles {
     @NotNull
-    private final CustomerID id;
+    private final Customer customer;
     private List<Article> articles;
 
     public void setArticles(List<Article> articles) {

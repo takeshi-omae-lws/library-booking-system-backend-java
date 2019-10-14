@@ -278,11 +278,11 @@ public class IMTests {
         articles2.add(article9);
 
         BorrowingArticles borrowingArticles1 =
-                new BorrowingArticles(customer1.getId(), articles1);
+                new BorrowingArticles(customer1, articles1);
         BorrowingArticles borrowingArticles2 =
-                new BorrowingArticles(customer2.getId(), articles2);
+                new BorrowingArticles(customer2, articles2);
         BorrowingArticles borrowingArticles3 =
-                new BorrowingArticles(customer3.getId(), articles3);
+                new BorrowingArticles(customer3, articles3);
 
         this.borrowingArticlesRepository.save(borrowingArticles1);
         this.borrowingArticlesRepository.save(borrowingArticles2);

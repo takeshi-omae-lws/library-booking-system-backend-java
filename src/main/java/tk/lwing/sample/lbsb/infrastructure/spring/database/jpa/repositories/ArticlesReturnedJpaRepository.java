@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import tk.lwing.sample.lbsb.domain.events.ArticlesReturned;
 import tk.lwing.sample.lbsb.domain.repositories.ArticlesReturnedRepository;
-import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.ConvertArticleReturned;
+import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.services.ConvertArticleReturned;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;

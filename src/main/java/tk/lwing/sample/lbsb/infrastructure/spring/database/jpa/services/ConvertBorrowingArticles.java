@@ -1,11 +1,13 @@
-package tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models;
+package tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.services;
 
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import tk.lwing.sample.lbsb.domain.entites.Article;
 import tk.lwing.sample.lbsb.domain.entites.BorrowingArticles;
-import tk.lwing.sample.lbsb.domain.valueobjects.CustomerID;
+import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.BorrowingArticlesTbl;
+import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.CustomersTbl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +17,7 @@ public class ConvertBorrowingArticles {
 
     public static BorrowingArticles toDomain(BunchOfTable bunchOfTable) {
         return new BorrowingArticles(
-                new CustomerID(
-                        bunchOfTable.getCustomersTbl().getCustomerId()),
+                ConvertCustomer.toDomain(bunchOfTable.getCustomersTbl()),
                 ConvertArticle.toDomain(bunchOfTable.getArticleBunchOfTableList())
         );
     }
@@ -31,7 +32,7 @@ public class ConvertBorrowingArticles {
 
         ConvertArticle.toDb(domain.getArticles());
 
-        String customerId = domain.getId().get();
+        String customerId = domain.getCustomer().getId().get();
         CustomersTbl customersTbl = CustomersTbl.builder()
                 .customerId(customerId).build();
 
@@ -63,6 +64,7 @@ public class ConvertBorrowingArticles {
     @RequiredArgsConstructor
     @Builder
     @Getter
+    @EqualsAndHashCode(of = "borrowingArticlesTbl")
     public static class BunchOfTable {
         private final BorrowingArticlesTbl borrowingArticlesTbl;
         private final CustomersTbl customersTbl;

@@ -1,9 +1,10 @@
-package tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models;
+package tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.services;
 
 import tk.lwing.sample.lbsb.domain.entites.BorrowRule;
 import tk.lwing.sample.lbsb.domain.valueobjects.Amount;
 import tk.lwing.sample.lbsb.domain.valueobjects.RuleID;
 import tk.lwing.sample.lbsb.domain.valueobjects.StartAt;
+import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.BorrowRulesTbl;
 
 import java.util.List;
 import java.util.stream.Collectors;

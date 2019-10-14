@@ -1,4 +1,4 @@
-package tk.lwing.sample.lbsb.infrastructure.rest.spring.resources;
+package tk.lwing.sample.lbsb.infrastructure.spring.rest.resources;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

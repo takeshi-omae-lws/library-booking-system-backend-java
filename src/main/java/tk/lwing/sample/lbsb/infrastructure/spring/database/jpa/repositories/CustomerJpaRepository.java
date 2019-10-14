@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import tk.lwing.sample.lbsb.domain.entites.Customer;
 import tk.lwing.sample.lbsb.domain.repositories.CustomerRepository;
-import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.ConvertCustomer;
+import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.services.ConvertCustomer;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;

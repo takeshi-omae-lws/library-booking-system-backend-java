@@ -33,4 +33,5 @@ out/
 
 ### Spring ###
 *.log
+*log.*.gz
 

@@ -1,4 +1,4 @@
-package tk.lwing.sample.lbsb.infrastructure.rest.spring;
+package tk.lwing.sample.lbsb.infrastructure.spring.rest;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 import tk.lwing.sample.lbsb.domain.entites.Article;
 import tk.lwing.sample.lbsb.domain.entites.BorrowingArticles;
 import tk.lwing.sample.lbsb.domain.entites.Customer;
-import tk.lwing.sample.lbsb.infrastructure.rest.spring.resources.ArticleBody;
-import tk.lwing.sample.lbsb.infrastructure.rest.spring.resources.BorrowArticlesBody;
-import tk.lwing.sample.lbsb.infrastructure.rest.spring.resources.ConvertArticle;
-import tk.lwing.sample.lbsb.infrastructure.rest.spring.resources.ConvertBorrowingArticles;
-import tk.lwing.sample.lbsb.infrastructure.rest.spring.resources.ConvertCustomer;
+import tk.lwing.sample.lbsb.infrastructure.spring.rest.resources.ArticleBody;
+import tk.lwing.sample.lbsb.infrastructure.spring.rest.resources.BorrowArticlesBody;
+import tk.lwing.sample.lbsb.infrastructure.spring.rest.services.ConvertArticle;
+import tk.lwing.sample.lbsb.infrastructure.spring.rest.services.ConvertBorrowingArticles;
+import tk.lwing.sample.lbsb.infrastructure.spring.rest.services.ConvertCustomer;
 import tk.lwing.sample.lbsb.usecase.CustomerUseCase;
 
 import javax.validation.constraints.NotNull;
@@ -24,8 +24,8 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/v1/return")
-public class ReturnController {
+@RequestMapping(path = "/v1/borrow")
+public class BorrowController {
 
     @NotNull
     private final CustomerUseCase customerUseCase;
@@ -42,7 +42,7 @@ public class ReturnController {
         }
 
         BorrowingArticles borrowingArticles =
-                this.customerUseCase.returnArticles(customer, articles);
+                this.customerUseCase.borrowArticles(customer, articles);
 
         return ConvertBorrowingArticles.toBody(borrowingArticles);
     }

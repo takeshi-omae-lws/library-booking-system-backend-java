@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import tk.lwing.sample.lbsb.domain.entites.KeepRule;
 import tk.lwing.sample.lbsb.domain.repositories.KeepRuleRepository;
 import tk.lwing.sample.lbsb.domain.valueobjects.AsOf;
-import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.ConvertKeepRule;
+import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.services.ConvertKeepRule;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -35,13 +35,13 @@ public class KeepRuleJpaRepository implements KeepRuleRepository {
     public KeepRule findLast() {
         return ConvertKeepRule.toDomain(
                 this.keepRulesTblRepository
-                        .findFirstByStartAtOrderByStartAtDesc(LocalDateTime.MAX));
+                        .findFirstByStartAtBeforeOrderByStartAtDesc(LocalDateTime.MAX));
     }
 
     @Override
     public KeepRule findByAsOf(AsOf asOf) {
         return ConvertKeepRule.toDomain(
                 this.keepRulesTblRepository
-                        .findFirstByStartAtOrderByStartAtDesc(asOf.get()));
+                        .findFirstByStartAtBeforeOrderByStartAtDesc(asOf.get()));
     }
 }

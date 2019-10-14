@@ -9,8 +9,8 @@ import tk.lwing.sample.lbsb.domain.valueobjects.CustomerID;
 import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.ArticleCategoriesTbl;
 import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.ArticlesTbl;
 import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.BorrowedArticlesTbl;
-import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.ConvertArticle;
-import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.ConvertArticleBorrowed;
+import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.services.ConvertArticle;
+import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.services.ConvertArticleBorrowed;
 import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.CustomersTbl;
 
 import javax.validation.constraints.NotNull;

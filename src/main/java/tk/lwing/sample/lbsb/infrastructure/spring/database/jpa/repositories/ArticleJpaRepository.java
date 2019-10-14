@@ -3,12 +3,13 @@ package tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.repositories;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import tk.lwing.sample.lbsb.domain.entites.Article;
+import tk.lwing.sample.lbsb.domain.exeptions.NotFoundException;
 import tk.lwing.sample.lbsb.domain.repositories.ArticleRepository;
 import tk.lwing.sample.lbsb.domain.types.ArticleStatus;
 import tk.lwing.sample.lbsb.domain.valueobjects.ArticleID;
 import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.ArticleCategoriesTbl;
 import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.ArticlesTbl;
-import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.ConvertArticle;
+import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.services.ConvertArticle;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class ArticleJpaRepository implements ArticleRepository {
             List<ArticlesTbl> articlesTblList) {
         List<String> articleIds = new ArrayList<>();
         Map<String, ArticlesTbl> articlesTblMap = new HashMap<>();
-        // TODO using #stream() ???
+
         for (ArticlesTbl articlesTbl : articlesTblList) {
             articlesTblMap.put(articlesTbl.getArticleId(), articlesTbl);
             articleIds.add(articlesTbl.getArticleId());
@@ -100,25 +101,19 @@ public class ArticleJpaRepository implements ArticleRepository {
     public Article findById(ArticleID id) {
 
         ArticlesTbl articlesTbl =
-                this.articlesTblRepository.findById(id.get()).orElse(null);
+                this.articlesTblRepository.findById(id.get())
+                        .orElseThrow(() ->
+                                new NotFoundException("ArticleId", id.get()));
 
-        return articlesTbl == null ? null :
-                ConvertArticle.toDomain(
-                        this.generateBunchOfTable(articlesTbl));
+        return ConvertArticle.toDomain(
+                this.generateBunchOfTable(articlesTbl));
     }
 
     @Override
     public Article updateArticleStatus(Article article) {
-
-        final String id = article.getId().get();
-        ArticlesTbl articlesTbl =
-                this.articlesTblRepository.findById(id).orElse(null);
-        if (articlesTbl == null) {
-            return null;
-        }
-        articlesTbl.setStatus(article.getStatus().getCode());
         ArticlesTbl updatedArticlesTbl =
-                this.articlesTblRepository.save(articlesTbl);
+                this.articlesTblRepository.save(
+                        ConvertArticle.toDb(article).getArticlesTbl());
         return ConvertArticle.toDomain(
                 this.generateBunchOfTable(updatedArticlesTbl));
     }

@@ -1,8 +1,9 @@
-package tk.lwing.sample.lbsb.infrastructure.rest.spring.resources;
+package tk.lwing.sample.lbsb.infrastructure.spring.rest.services;
 
 import tk.lwing.sample.lbsb.domain.entites.Article;
 import tk.lwing.sample.lbsb.domain.entites.BorrowingArticles;
-import tk.lwing.sample.lbsb.domain.valueobjects.CustomerID;
+import tk.lwing.sample.lbsb.infrastructure.spring.rest.resources.ArticleBody;
+import tk.lwing.sample.lbsb.infrastructure.spring.rest.resources.BorrowArticlesBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,7 @@ public class ConvertBorrowingArticles {
                 .collect(Collectors.toList());
 
         return new BorrowingArticles(
-                new CustomerID(body.getCustomerBody().getId()),
+                ConvertCustomer.toDomain(body.getCustomerBody()),
                 domainArticleList);
     }
 
@@ -29,7 +30,7 @@ public class ConvertBorrowingArticles {
                 .collect(Collectors.toList());
 
         return BorrowArticlesBody.builder()
-                .customerBody(CustomerBody.builder().id(borrowingArticles.getId().get()).build())
+                .customerBody(ConvertCustomer.toBody(borrowingArticles.getCustomer()))
                 .articleBodyList(articleBodyList)
                 .build();
     }
@@ -38,14 +39,13 @@ public class ConvertBorrowingArticles {
 
         List<BorrowingArticles> borrowingArticles = new ArrayList<>();
         for (BorrowArticlesBody borrowArticlesBody : borrowArticlesBodies) {
-            CustomerID id =
-                    new CustomerID(borrowArticlesBody.getCustomerBody().getId());
             List<Article> domainArticles = new ArrayList<>();
             for (ArticleBody articleBody :
                     borrowArticlesBody.getArticleBodyList()) {
                 domainArticles.add(ConvertArticle.toDomain(articleBody));
             }
-            BorrowingArticles domain = new BorrowingArticles(id,
+            BorrowingArticles domain = new BorrowingArticles(
+                    ConvertCustomer.toDomain(borrowArticlesBody.getCustomerBody()),
                     domainArticles);
             borrowingArticles.add(domain);
         }
@@ -61,7 +61,7 @@ public class ConvertBorrowingArticles {
                     .collect(Collectors.toList());
 
             BorrowArticlesBody body = BorrowArticlesBody.builder()
-                    .customerBody(CustomerBody.builder().id(domain.getId().get()).build())
+                    .customerBody(ConvertCustomer.toBody(domain.getCustomer()))
                     .articleBodyList(articleBodyList)
                     .build();
             bodies.add(body);

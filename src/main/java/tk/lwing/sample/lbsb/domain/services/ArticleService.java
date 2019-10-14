@@ -8,6 +8,7 @@ import tk.lwing.sample.lbsb.domain.types.ArticleStatus;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class ArticleService {

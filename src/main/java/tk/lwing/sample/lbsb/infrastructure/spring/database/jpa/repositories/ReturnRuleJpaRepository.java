@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import tk.lwing.sample.lbsb.domain.entites.ReturnRule;
 import tk.lwing.sample.lbsb.domain.repositories.ReturnRuleRepository;
 import tk.lwing.sample.lbsb.domain.valueobjects.AsOf;
-import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.ConvertReturnRule;
+import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.services.ConvertReturnRule;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -35,14 +35,14 @@ public class ReturnRuleJpaRepository implements ReturnRuleRepository {
     public ReturnRule findLast() {
         return ConvertReturnRule.toDomain(
                 this.returnRulesTblRepository
-                        .findFirstByStartAtOrderByStartAtDesc(LocalDateTime.MAX));
+                        .findFirstByStartAtBeforeOrderByStartAtDesc(LocalDateTime.MAX));
     }
 
     @Override
     public ReturnRule findByAsOf(AsOf asOf) {
         return ConvertReturnRule.toDomain(
                 this.returnRulesTblRepository
-                        .findFirstByStartAtOrderByStartAtDesc(asOf.get()));
+                        .findFirstByStartAtBeforeOrderByStartAtDesc(asOf.get()));
     }
 
 }

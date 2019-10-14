@@ -14,14 +14,17 @@ import tk.lwing.sample.lbsb.domain.valueobjects.CustomerID;
 import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.ArticleCategoriesTbl;
 import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.ArticlesTbl;
 import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.BorrowingArticlesTbl;
-import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.ConvertArticle;
-import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.ConvertBorrowingArticles;
 import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.CustomersTbl;
+import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.services.ConvertArticle;
+import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.services.ConvertBorrowingArticles;
+import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.services.ConvertCustomer;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Repository
@@ -101,13 +104,13 @@ public class BorrowingArticlesJpaRepository implements BorrowingArticlesReposito
                 ConvertBorrowingArticles.toDomain(saveBunchOfTableList);
         List<Article> savedArticles = new ArrayList<>();
         for (BorrowingArticles savedBorrowingArticles : savedBorrowingArticlesList) {
-            if (!borrowingArticles.getId().equals(savedBorrowingArticles.getId())) {
+            if (!borrowingArticles.getCustomer().getId().equals(savedBorrowingArticles.getCustomer().getId())) {
                 return null;
             }
             savedArticles.addAll(savedBorrowingArticles.getArticles());
         }
 
-        return new BorrowingArticles(borrowingArticles.getId(), savedArticles);
+        return new BorrowingArticles(borrowingArticles.getCustomer(), savedArticles);
     }
 
     @Override
@@ -119,6 +122,19 @@ public class BorrowingArticlesJpaRepository implements BorrowingArticlesReposito
                                 .thenComparing(BorrowingArticlesTbl::getArticleId))
                         .collect(Collectors.toList());
 
+        List<String> customerIds = borrowingArticlesTblList.stream()
+                .sorted(Comparator.comparing(BorrowingArticlesTbl::getCustomerId))
+                .map(BorrowingArticlesTbl::getCustomerId)
+                .collect(Collectors.toList())
+                .stream()
+                .distinct()
+                .collect(Collectors.toList());
+        List<CustomersTbl> customersTblList =
+                this.customersTblRepository.findByCustomerIdIn(customerIds);
+        Map<String, CustomersTbl> customersTblMap = new HashMap<>();
+        for (CustomersTbl customersTbl : customersTblList) {
+            customersTblMap.put(customersTbl.getCustomerId(), customersTbl);
+        }
         List<String> articleIds = borrowingArticlesTblList.stream()
                 .sorted(Comparator.comparing(BorrowingArticlesTbl::getArticleId))
                 .map(BorrowingArticlesTbl::getArticleId)
@@ -184,12 +200,11 @@ public class BorrowingArticlesJpaRepository implements BorrowingArticlesReposito
             }
             if (i == borrowingTblSize - 1 || !customerId.equals(nextCustomerId)) {
                 borrowingArticlesList.add(new BorrowingArticles(
-                        new CustomerID(customerId), articles));
+                        ConvertCustomer.toDomain(customersTblMap.get(customerId)),
+                        articles));
                 articles = new ArrayList<>();
             }
         }
-        logger.debug("#borrowingArticlesList# size: " + borrowingArticlesList.size());
-        logger.debug("#borrowingArticlesList# toString: " + borrowingArticlesList.toString());
         return borrowingArticlesList;
     }
 

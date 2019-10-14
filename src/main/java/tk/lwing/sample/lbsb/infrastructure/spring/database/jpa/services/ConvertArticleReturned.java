@@ -1,8 +1,9 @@
-package tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models;
+package tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.services;
 
 import tk.lwing.sample.lbsb.domain.events.ArticlesReturned;
 import tk.lwing.sample.lbsb.domain.valueobjects.ArticlesBorrowedID;
 import tk.lwing.sample.lbsb.domain.valueobjects.OccurredAt;
+import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.ReturnedArticlesTbl;
 
 import java.util.List;
 import java.util.stream.Collectors;

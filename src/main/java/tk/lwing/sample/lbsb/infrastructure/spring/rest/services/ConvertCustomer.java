@@ -1,7 +1,8 @@
-package tk.lwing.sample.lbsb.infrastructure.rest.spring.resources;
+package tk.lwing.sample.lbsb.infrastructure.spring.rest.services;
 
 import tk.lwing.sample.lbsb.domain.entites.Customer;
 import tk.lwing.sample.lbsb.domain.valueobjects.CustomerID;
+import tk.lwing.sample.lbsb.infrastructure.spring.rest.resources.CustomerBody;
 
 public class ConvertCustomer {
 

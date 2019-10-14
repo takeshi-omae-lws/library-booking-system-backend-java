@@ -8,6 +8,6 @@ import java.time.LocalDateTime;
 public interface BorrowRulesTblRepository
         extends JpaRepository<BorrowRulesTbl, String> {
 
-    BorrowRulesTbl findFirstByStartAtOrderByStartAtDesc(LocalDateTime dateTime);
+    BorrowRulesTbl findFirstByStartAtBeforeOrderByStartAtDesc(LocalDateTime dateTime);
 
 }

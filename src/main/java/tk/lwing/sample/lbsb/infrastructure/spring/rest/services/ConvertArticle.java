@@ -1,9 +1,10 @@
-package tk.lwing.sample.lbsb.infrastructure.rest.spring.resources;
+package tk.lwing.sample.lbsb.infrastructure.spring.rest.services;
 
 import tk.lwing.sample.lbsb.domain.entites.Article;
 import tk.lwing.sample.lbsb.domain.types.ArticleStatus;
 import tk.lwing.sample.lbsb.domain.types.Category;
 import tk.lwing.sample.lbsb.domain.valueobjects.ArticleID;
+import tk.lwing.sample.lbsb.infrastructure.spring.rest.resources.ArticleBody;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -96,9 +96,9 @@ public class BorrowingArticlesService {
     public BorrowingArticles updateInsertBorrowingArticles(Customer customer,
                                                            List<Article> articles) {
         if (this.borrowingArticlesRepository.findByCustomerID(customer.getId()) == null) {
-            return this.borrowingArticlesRepository.save(new BorrowingArticles(customer.getId(), articles));
+            return this.borrowingArticlesRepository.save(new BorrowingArticles(customer, articles));
         }
-        return this.borrowingArticlesRepository.update(new BorrowingArticles(customer.getId(), articles));
+        return this.borrowingArticlesRepository.update(new BorrowingArticles(customer, articles));
     }
 
     public BorrowingArticles deleteBorrowingArticles(Customer customer,
@@ -114,7 +114,7 @@ public class BorrowingArticlesService {
         }
 
         return this.borrowingArticlesRepository.update(
-                new BorrowingArticles(customer.getId(), targetArticles));
+                new BorrowingArticles(customer, targetArticles));
     }
 
     public void saveArticlesBorrowed(Customer customer, List<Article> articles) {

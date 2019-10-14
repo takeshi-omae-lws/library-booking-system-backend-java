@@ -14,6 +14,32 @@ Content-Type: application/json
   },
   "articleBodyList": [
     {
+      "id": "A003",
+      "categories": [
+        0
+      ],
+      "status": 0
+    },
+    {
+      "id": "A004",
+      "categories": [
+        0
+      ],
+      "status": 0
+    }
+  ]
+}
+
+###
+POST http://localhost:8080/v1/return
+Content-Type: application/json
+
+{
+  "customerBody": {
+    "id": "CST001"
+  },
+  "articleBodyList": [
+    {
       "id": "A001",
       "categories": [
         0

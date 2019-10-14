@@ -8,5 +8,5 @@ import java.time.LocalDateTime;
 public interface KeepRulesTblRepository
         extends JpaRepository<KeepRulesTbl, String> {
 
-    KeepRulesTbl findFirstByStartAtOrderByStartAtDesc(LocalDateTime dateTime);
+    KeepRulesTbl findFirstByStartAtBeforeOrderByStartAtDesc(LocalDateTime dateTime);
 }

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import tk.lwing.sample.lbsb.domain.entites.BorrowRule;
 import tk.lwing.sample.lbsb.domain.repositories.BorrowRuleRepository;
 import tk.lwing.sample.lbsb.domain.valueobjects.AsOf;
-import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.ConvertBorrowRule;
+import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.services.ConvertBorrowRule;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
@@ -35,14 +35,14 @@ public class BorrowRuleJpaRepository implements BorrowRuleRepository {
     public BorrowRule findLast() {
         return ConvertBorrowRule.toDomain(
                 this.borrowRulesTblRepository
-                        .findFirstByStartAtOrderByStartAtDesc(LocalDateTime.MAX));
+                        .findFirstByStartAtBeforeOrderByStartAtDesc(LocalDateTime.MAX));
     }
 
     @Override
     public BorrowRule findByAsOf(AsOf asOf) {
         return ConvertBorrowRule.toDomain(
                 this.borrowRulesTblRepository
-                        .findFirstByStartAtOrderByStartAtDesc(asOf.get()));
+                        .findFirstByStartAtBeforeOrderByStartAtDesc(asOf.get()));
 
     }
 

@@ -2,6 +2,7 @@ package tk.lwing.sample.lbsb.domain.repositories;
 
 import tk.lwing.sample.lbsb.domain.entites.Article;
 import tk.lwing.sample.lbsb.domain.entites.BorrowingArticles;
+import tk.lwing.sample.lbsb.domain.entites.Customer;
 import tk.lwing.sample.lbsb.domain.valueobjects.CustomerID;
 
 import java.util.ArrayList;
@@ -11,13 +12,14 @@ import java.util.Map;
 
 public class BorrowingArticlesIMRepository implements BorrowingArticlesRepository {
 
-    private final Map<String, BorrowingArticles> borrowingArticlesMap = new HashMap<>();
+    private final Map<Customer, BorrowingArticles> borrowingArticlesMap =
+            new HashMap<>();
 
     @Override
     public BorrowingArticles save(BorrowingArticles borrowingArticles) {
-        this.borrowingArticlesMap.put(borrowingArticles.getId().get(),
+        this.borrowingArticlesMap.put(borrowingArticles.getCustomer(),
                 borrowingArticles);
-        return this.borrowingArticlesMap.get(borrowingArticles.getId().get());
+        return this.borrowingArticlesMap.get(borrowingArticles.getCustomer());
     }
 
     @Override
@@ -28,10 +30,10 @@ public class BorrowingArticlesIMRepository implements BorrowingArticlesRepositor
     @Override
     public BorrowingArticles update(BorrowingArticles borrowingArticles) {
         BorrowingArticles target =
-                this.borrowingArticlesMap.get(borrowingArticles.getId().get());
+                this.borrowingArticlesMap.get(borrowingArticles.getCustomer());
         target.setArticles(borrowingArticles.getArticles());
-        this.borrowingArticlesMap.put(borrowingArticles.getId().get(), target);
-        return this.borrowingArticlesMap.get(borrowingArticles.getId().get());
+        this.borrowingArticlesMap.put(borrowingArticles.getCustomer(), target);
+        return this.borrowingArticlesMap.get(borrowingArticles.getCustomer());
     }
 
     @Override
@@ -45,7 +47,7 @@ public class BorrowingArticlesIMRepository implements BorrowingArticlesRepositor
 
         BorrowingArticles targetBorrowingArticles =
                 this.borrowingArticlesMap.get(
-                        borrowingArticlesList.get(0).getId().get());
+                        borrowingArticlesList.get(0).getCustomer());
         List<Article> targetArticles = targetBorrowingArticles.getArticles();
 
         return null;

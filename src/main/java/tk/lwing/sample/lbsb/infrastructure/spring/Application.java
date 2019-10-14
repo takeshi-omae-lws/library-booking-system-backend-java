@@ -1,4 +1,4 @@
-package tk.lwing.sample.lbsb;
+package tk.lwing.sample.lbsb.infrastructure.spring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,9 +1,10 @@
-package tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models;
+package tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.services;
 
 import tk.lwing.sample.lbsb.domain.entites.ReturnRule;
 import tk.lwing.sample.lbsb.domain.valueobjects.Period;
 import tk.lwing.sample.lbsb.domain.valueobjects.RuleID;
 import tk.lwing.sample.lbsb.domain.valueobjects.StartAt;
+import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.ReturnRulesTbl;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -1,7 +1,8 @@
-package tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models;
+package tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.services;
 
 import tk.lwing.sample.lbsb.domain.entites.Customer;
 import tk.lwing.sample.lbsb.domain.valueobjects.CustomerID;
+import tk.lwing.sample.lbsb.infrastructure.spring.database.jpa.models.CustomersTbl;
 
 import java.util.List;
 import java.util.stream.Collectors;
